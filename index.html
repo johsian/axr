@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AXR — Photography · Marketing · Documentary</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #0A0A0A;
+      --surface:      #141414;
+      --surface-2:    #1C1C1C;
+      --text:         #FFFFFF;
+      --text-muted:   #A0A0A0;
+      --border:       rgba(255,255,255,0.10);
+      --accent:       #FFFFFF;
+      --cta-bg:       #FFFFFF;
+      --cta-text:     #0A0A0A;
+      --font-head:    'Archivo', sans-serif;
+      --font-body:    'Space Grotesk', sans-serif;
+      --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+      --nav-h:        64px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    a { color: inherit; text-decoration: none; }
+
+    button {
+      font-family: var(--font-body);
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* ─── Nav ───────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s var(--ease);
+    }
+
+    .nav-logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s var(--ease);
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 9px 22px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 2px;
+      transition: background 0.2s var(--ease), color 0.2s var(--ease);
+    }
+
+    .nav-cta:hover {
+      background: var(--cta-bg);
+      color: var(--cta-text);
+    }
+
+    /* ─── Hamburger (mobile) ────────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      cursor: pointer;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.25s var(--ease);
+    }
+
+    /* ─── Hero ──────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      height: 100dvh;
+      min-height: 600px;
+      display: flex;
+      align-items: flex-end;
+      padding: 0 40px 72px;
+      overflow: hidden;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-media video,
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Gradient overlay — bottom-heavy for text legibility */
+    .hero-media::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(10,10,10,0.10) 0%,
+        rgba(10,10,10,0.20) 40%,
+        rgba(10,10,10,0.80) 75%,
+        rgba(10,10,10,0.95) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cta-bg);
+      color: var(--cta-text);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border-radius: 2px;
+      transition: opacity 0.2s var(--ease);
+    }
+    .btn-primary:hover { opacity: 0.88; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      right: 40px;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .hero-scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 1; }
+    }
+
+    /* ─── Section Shared ────────────────────────────────── */
+    section { padding: 96px 40px; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--text-muted);
+    }
+
+    /* ─── Filter Bar ────────────────────────────────────── */
+    .filter-bar {
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 90;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+    }
+
+    .filter-inner {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 12px 0;
+    }
+    .filter-inner::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      flex-shrink: 0;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+      white-space: nowrap;
+      min-height: 44px;
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+      border-color: var(--border);
+    }
+
+    .filter-btn.active {
+      color: var(--cta-text);
+      background: var(--cta-bg);
+      border-color: var(--cta-bg);
+    }
+
+    /* ─── Work Grid ─────────────────────────────────────── */
+    #work { padding-top: 72px; }
+
+    .grid-container {
+      columns: 3;
+      column-gap: 16px;
+    }
+
+    .project-card {
+      break-inside: avoid;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+      cursor: pointer;
+      background: var(--surface);
+      border-radius: 2px;
+    }
+
+    .project-card[data-category]:not(.visible) {
+      display: none;
+    }
+
+    .project-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.6s var(--ease);
+    }
+
+    /* Cards with different natural aspect ratios */
+    .card-tall   .project-img { aspect-ratio: 3/4; }
+    .card-wide   .project-img { aspect-ratio: 4/3; }
+    .card-square .project-img { aspect-ratio: 1/1; }
+    .card-cinema .project-img { aspect-ratio: 16/9; }
+
+    .project-card:hover .project-img {
+      transform: scale(1.04);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(10,10,10,0.92) 0%,
+        rgba(10,10,10,0.30) 50%,
+        transparent 100%
+      );
+      opacity: 0;
+      transition: opacity 0.35s var(--ease);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 24px;
+    }
+
+    .project-card:hover .project-overlay { opacity: 1; }
+
+    .project-cat {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .project-title {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .project-year {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .project-arrow {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease), background 0.2s var(--ease);
+    }
+    .project-card:hover .project-arrow { opacity: 1; }
+    .project-arrow:hover { background: rgba(255,255,255,0.22); }
+    .project-arrow svg { width: 14px; height: 14px; stroke: #fff; }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      .project-card:hover .project-img { transform: none; }
+      .project-overlay { opacity: 1; }
+      .hero-scroll-line { animation: none; opacity: 0.5; }
+    }
+
+    /* ─── Featured Project ──────────────────────────────── */
+    .featured {
+      padding: 0 40px 96px;
+    }
+
+    .featured-inner {
+      position: relative;
+      height: 70vh;
+      min-height: 480px;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .featured-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease);
+    }
+    .featured-inner:hover .featured-img { transform: scale(1.03); }
+
+    .featured-inner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(10,10,10,0.88) 0%,
+        rgba(10,10,10,0.40) 50%,
+        transparent 100%
+      );
+    }
+
+    .featured-content {
+      position: absolute;
+      z-index: 1;
+      bottom: 56px;
+      left: 56px;
+      max-width: 440px;
+    }
+
+    .featured-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 5px 12px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+      color: var(--text-muted);
+    }
+
+    .featured-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .featured-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    /* ─── About ─────────────────────────────────────────── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 96px 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-text {}
+
+    .about-headline {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    .about-body {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 36px;
+      max-width: 420px;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .about-visual {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .about-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ─── Clients / Brands ──────────────────────────────── */
+    .clients {
+      padding: 64px 40px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .clients-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .clients-logos {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 40px 56px;
+    }
+
+    .client-logo {
+      height: 56px;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.40;
+      transition: opacity 0.2s var(--ease);
+    }
+    .client-logo:hover { opacity: 0.80; }
+
+    /* ─── Contact / CTA ─────────────────────────────────── */
+    .contact {
+      padding: 120px 40px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .contact-headline {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 6vw, 80px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.0;
+      margin-bottom: 48px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 4px;
+      margin-bottom: 48px;
+      transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+    }
+    .contact-email:hover { color: var(--text); border-color: var(--text); }
+
+    .contact-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* ─── Footer ─────────────────────────────────────────── */
+    footer {
+      padding: 28px 40px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s var(--ease);
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-logo {
+      height: 24px;
+      width: auto;
+      opacity: 0.7;
+    }
+
+    /* ─── Mobile Drawer ──────────────────────────────────── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: var(--bg);
+      flex-direction: column;
+      padding: 80px 40px 40px;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--font-head);
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s var(--ease);
+      color: var(--text-muted);
+    }
+    .mobile-menu a:hover { color: var(--text); }
+
+    .mobile-menu-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 28px;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      line-height: 1;
+    }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .grid-container { columns: 2; }
+      .about { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { aspect-ratio: 4/3; max-width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      section { padding: 64px 20px; }
+      .hero { padding: 0 20px 64px; }
+      .hero-scroll { right: 20px; }
+
+      .filter-bar { padding: 0 20px; }
+
+      .grid-container { columns: 1; column-gap: 0; }
+
+      .featured { padding: 0 20px 64px; }
+      .featured-content { left: 24px; bottom: 32px; }
+
+      .about { padding: 64px 20px; }
+      .about-stats { gap: 24px; }
+
+      .clients { padding: 48px 20px; }
+      .clients-logos { gap: 28px 36px; }
+      .client-logo { height: 44px; }
+
+      .contact { padding: 80px 20px; }
+      .contact-actions { flex-direction: column; }
+
+      footer { padding: 24px 20px; flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 44px; }
+      .featured-title { font-size: 26px; }
+      .about-headline { font-size: 26px; }
+      .contact-headline { font-size: 36px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────── -->
+  <nav role="navigation" aria-label="Main navigation">
+    <img src="assets/logos/AXR 2026.png" alt="AXR" class="nav-logo" />
+
+    <ul class="nav-links" role="list">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <a href="#contact" class="nav-cta" aria-label="Start a project">Start a Project</a>
+
+    <button class="hamburger" aria-label="Open menu" onclick="openMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+    <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Close menu">&#x2715;</button>
+    <a href="#work"    onclick="closeMenu()">Work</a>
+    <a href="#about"   onclick="closeMenu()">About</a>
+    <a href="#contact" onclick="closeMenu()">Contact</a>
+  </div>
+
+  <!-- ─── Hero ─────────────────────────────────────── -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero-media" aria-hidden="true">
+      <!--
+        Swap to video when ready:
+        <video autoplay muted loop playsinline poster="assets/Alberto/DSC01094.JPG">
+          <source src="assets/Videos/Danny.mp4" type="video/mp4" />
+        </video>
+      -->
+      <img src="assets/Alberto/DSC01193.JPG" alt="" />
+    </div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Independent Creative Studio</p>
+      <h1 class="hero-title">AXR</h1>
+      <p class="hero-sub">Photography · Marketing · Documentary — stories told with purpose.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">
+          View Work
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn-ghost">Start a Project</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ─── Filter + Project Grid ────────────────────── -->
+  <div class="filter-bar" role="navigation" aria-label="Project filter">
+    <div class="filter-inner">
+      <button class="filter-btn active" data-filter="all"           onclick="filterProjects(this, 'all')">All</button>
+      <button class="filter-btn"        data-filter="photography"   onclick="filterProjects(this, 'photography')">Photography</button>
+      <button class="filter-btn"        data-filter="documentary"   onclick="filterProjects(this, 'documentary')">Documentary</button>
+      <button class="filter-btn"        data-filter="marketing"     onclick="filterProjects(this, 'marketing')">Marketing</button>
+    </div>
+  </div>
+
+  <section id="work" aria-label="Work">
+    <div class="section-label" aria-hidden="true">Selected Work</div>
+
+    <div class="grid-container" role="list">
+
+      <!-- Card 1 -->
+      <article class="project-card card-tall visible" data-category="photography" role="listitem" tabindex="0" aria-label="Project: Portraits — Photography">
+        <img src="assets/Alberto/DSC01094.JPG" alt="Portrait photography project" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Photography</div>
+          <h2 class="project-title">Portraits</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="project-card card-cinema visible" data-category="documentary" role="listitem" tabindex="0" aria-label="Project: Opening Hipodromos — Documentary">
+        <img src="assets/Alberto/DSC03336.jpg" alt="Documentary: Opening Hipodromos event" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Documentary</div>
+          <h2 class="project-title">Opening Hipodromos</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="project-card card-wide visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Brand Identity — Marketing">
+        <img src="assets/Alberto/DSC01306.JPG" alt="Marketing brand photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Marketing</div>
+          <h2 class="project-title">Brand Identity</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="project-card card-square visible" data-category="photography" role="listitem" tabindex="0" aria-label="Project: Editorial — Photography">
+        <img src="assets/Alberto/IMG_5249.JPG" alt="Editorial photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Photography</div>
+          <h2 class="project-title">Editorial</h2>
+          <div class="project-year">2024</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 5 -->
+      <article class="project-card card-tall visible" data-category="documentary" role="listitem" tabindex="0" aria-label="Project: Salón de la Fama — Documentary">
+        <div class="project-overlay">
+          <div class="project-cat">Documentary</div>
+          <h2 class="project-title">Salón de la Fama</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 6 -->
+      <article class="project-card card-wide visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Campaign — Marketing">
+        <img src="assets/Alberto/DSC03490.jpg" alt="Marketing campaign photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Marketing</div>
+          <h2 class="project-title">Campaign</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 7 -->
+      <article class="project-card card-cinema visible" data-category="photography" role="listitem" tabindex="0" aria-label="Project: Landscape — Photography">
+        <img src="assets/Alberto/DSC_3930.jpg" alt="Landscape photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Photography</div>
+          <h2 class="project-title">Landscape</h2>
+          <div class="project-year">2024</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 8 -->
+      <article class="project-card card-tall visible" data-category="photography" role="listitem" tabindex="0" aria-label="Project: People — Photography">
+        <img src="assets/Alberto/DSC_4501.JPG" alt="People photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Photography</div>
+          <h2 class="project-title">People</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 9 -->
+      <article class="project-card card-square visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Product — Marketing">
+        <img src="assets/Alberto/IMG_3343.jpg" alt="Product marketing photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Marketing</div>
+          <h2 class="project-title">Product</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ─── Featured Project ──────────────────────────── -->
+  <div class="featured" aria-label="Featured project">
+    <div class="featured-inner">
+      <img src="assets/Alberto/DSC03336.jpg" alt="Featured project: Hall of Fame documentary" class="featured-img" loading="lazy" />
+      <div class="featured-content">
+        <span class="featured-tag">Featured</span>
+        <h2 class="featured-title">Hall of Fame Documentary</h2>
+        <p class="featured-desc">A visual record of an evening celebrating legacy, culture, and community — captured as it happened.</p>
+        <a href="#contact" class="btn-primary">
+          View Case
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── About ─────────────────────────────────────── -->
+  <div class="about" id="about" aria-label="About AXR">
+    <div class="about-text">
+      <div class="section-label" aria-hidden="true">About</div>
+      <h2 class="about-headline">Independent storytelling through the lens.</h2>
+      <p class="about-body">
+        AXR works at the intersection of photography, documentary, and brand marketing
+        to tell stories that matter. Every project is approached with editorial discipline,
+        a creative eye, and a deep respect for the subject.
+      </p>
+      <a href="#contact" class="btn-primary">Get in Touch</a>
+
+      <div class="about-stats" aria-label="Studio stats">
+        <div>
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Years Active</div>
+        </div>
+        <div>
+          <div class="stat-num">50+</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div>
+          <div class="stat-num">3</div>
+          <div class="stat-label">Disciplines</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-visual" aria-hidden="true">
+      <img src="assets/Alberto/6E9A1882.jpg" alt="AXR behind the scenes" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- ─── Client Logos ──────────────────────────────── -->
+  <div class="clients" aria-label="Clients and partners">
+    <p class="clients-label">Trusted by</p>
+    <div class="clients-logos">
+      <img src="assets/logos/HC_Logo-Principal_Blanco.png"  alt="Hacienda client logo"       class="client-logo" loading="lazy" />
+      <img src="assets/logos/Potrero Los Llanos White.png"   alt="Potrero Los Llanos"          class="client-logo" loading="lazy" />
+      <img src="assets/logos/PRHOA WHITE LOGO .png"          alt="PRHOA"                       class="client-logo" loading="lazy" />
+      <img src="assets/logos/LC-logo-negativo.png"           alt="LC client logo"              class="client-logo" loading="lazy" />
+      <img src="assets/logos/Sony_logo.svg"                  alt="Sony"                        class="client-logo" loading="lazy" />
+    </div>
+  </div>
+
+  <!-- ─── Contact / CTA ─────────────────────────────── -->
+  <section class="contact" id="contact" aria-label="Contact">
+    <p class="contact-eyebrow">Let's Work Together</p>
+    <h2 class="contact-headline">Got a project<br/>in mind?</h2>
+    <a href="mailto:hello@axr.co" class="contact-email">hello@axr.co</a>
+    <div class="contact-actions">
+      <a href="mailto:hello@axr.co" class="btn-primary">
+        Start a Project
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="btn-ghost" aria-label="AXR on Instagram">Instagram</a>
+    </div>
+  </section>
+
+  <!-- ─── Footer ────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <img src="assets/logos/AXR 2026.png" alt="AXR" class="footer-logo" />
+    <span class="footer-copy">© 2026 AXR Studio. All rights reserved.</span>
+    <ul class="footer-links" role="list">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </footer>
+
+  <!-- ─── Scripts ───────────────────────────────────── -->
+  <script>
+    // ── Filter ──────────────────────────────────────
+    function filterProjects(btn, category) {
+      // Update active button
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Show / hide cards
+      document.querySelectorAll('.project-card').forEach(card => {
+        const match = category === 'all' || card.dataset.category === category;
+        card.classList.toggle('visible', match);
+        // For CSS: show/hide via display
+        card.style.display = match ? '' : 'none';
+      });
+    }
+
+    // ── Mobile menu ─────────────────────────────────
+    function openMenu() {
+      document.getElementById('mobileMenu').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Close menu on Escape
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeMenu();
+    });
+
+    // ── Nav scroll background ────────────────────────
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(10,10,10,0.97)'
+        : 'rgba(10,10,10,0.85)';
+    }, { passive: true });
+
+    // ── Keyboard: open cards on Enter ───────────────
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
