@@ -595,6 +595,26 @@
       gap: 40px 56px;
     }
 
+    .featured-client-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+
+    .featured-client-logo-frame {
+      width: min(100%, 1400px);
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .featured-client-logo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      display: block;
+    }
+
     .client-logo {
       height: 56px;
       width: auto;
@@ -778,6 +798,7 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="#work" onclick="setTimeout(()=>{ const btn=document.querySelector('[data-filter=hipodromos]'); filterProjects(btn,'hipodromos'); },100)">Hipodromos</a></li>
     </ul>
 
     <a href="#contact" class="nav-cta" aria-label="Start a project">Start a Project</a>
@@ -792,7 +813,8 @@
     <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Close menu">&#x2715;</button>
     <a href="#work"    onclick="closeMenu()">Work</a>
     <a href="#about"   onclick="closeMenu()">About</a>
-    <a href="#contact" onclick="closeMenu()">Contact</a>
+    <a href="#contact"    onclick="closeMenu()">Contact</a>
+    <a href="#hipodromos" onclick="closeMenu()">Hipodromos</a>
   </div>
 
   <!-- ─── Hero ─────────────────────────────────────── -->
@@ -833,6 +855,7 @@
       <button class="filter-btn"        data-filter="photography"   onclick="filterProjects(this, 'photography')">Photography</button>
       <button class="filter-btn"        data-filter="documentary"   onclick="filterProjects(this, 'documentary')">Documentary</button>
       <button class="filter-btn"        data-filter="marketing"     onclick="filterProjects(this, 'marketing')">Marketing</button>
+      <button class="filter-btn"        data-filter="hipodromos"    onclick="filterProjects(this, 'hipodromos')">Hipodromos</button>
     </div>
   </div>
 
@@ -856,10 +879,10 @@
       </article>
 
       <!-- Card 2 -->
-      <article class="project-card card-cinema visible" data-category="documentary" role="listitem" tabindex="0" aria-label="Project: Opening Hipodromos — Documentary">
+      <article class="project-card card-cinema visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Opening Hipodromos — Documentary">
         <img src="assets/Alberto/DSC03336.jpg" alt="Documentary: Opening Hipodromos event" class="project-img" loading="lazy" />
         <div class="project-overlay">
-          <div class="project-cat">Documentary</div>
+          <div class="project-cat">Hipodromos</div>
           <h2 class="project-title">Opening Hipodromos</h2>
           <div class="project-year">2025</div>
         </div>
@@ -907,11 +930,11 @@
       </article>
 
       <!-- Card 6 -->
-      <article class="project-card card-wide visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Campaign — Marketing">
-        <img src="assets/Alberto/DSC03490.jpg" alt="Marketing campaign photography" class="project-img" loading="lazy" />
+      <article class="project-card card-wide visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Hipódromo Camarero — Hipodromos">
+        <img src="assets/Alberto/DSC03490.jpg" alt="Hipódromo Camarero starting gate" class="project-img" loading="lazy" />
         <div class="project-overlay">
-          <div class="project-cat">Marketing</div>
-          <h2 class="project-title">Campaign</h2>
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Hipódromo Camarero</h2>
           <div class="project-year">2025</div>
         </div>
         <div class="project-arrow" aria-hidden="true">
@@ -920,11 +943,11 @@
       </article>
 
       <!-- Card 7 -->
-      <article class="project-card card-cinema visible" data-category="photography" role="listitem" tabindex="0" aria-label="Project: Landscape — Photography">
-        <img src="assets/Alberto/DSC_3930.jpg" alt="Landscape photography" class="project-img" loading="lazy" />
+      <article class="project-card card-cinema visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: On the Track — Hipodromos">
+        <img src="assets/Alberto/DSC_3930.jpg" alt="Filmmaker with horse at racetrack" class="project-img" loading="lazy" />
         <div class="project-overlay">
-          <div class="project-cat">Photography</div>
-          <h2 class="project-title">Landscape</h2>
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">On the Track</h2>
           <div class="project-year">2024</div>
         </div>
         <div class="project-arrow" aria-hidden="true">
@@ -952,6 +975,45 @@
           <div class="project-cat">Marketing</div>
           <h2 class="project-title">Product</h2>
           <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 10 -->
+      <article class="project-card card-wide visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Racetrack — Hipodromos">
+        <img src="assets/Alberto/IMG_2497.jpg" alt="Racetrack grandstand" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Racetrack</h2>
+          <div class="project-year">2024</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 11 -->
+      <article class="project-card card-cinema visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Lucky Cash Campaign — Hipodromos">
+        <img src="assets/Alberto/IMG_8319.JPG" alt="Lucky Cash Hipódromo storefront campaign" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Lucky Cash Campaign</h2>
+          <div class="project-year">2021</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 12 -->
+      <article class="project-card card-wide visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Hipódromo Nacional — Hipodromos">
+        <img src="assets/Alberto/f9871272-5498-4f52-93d2-8541e34ebf2e.JPG" alt="Interview at Hipódromo Nacional" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Hipódromo Nacional</h2>
+          <div class="project-year">2022</div>
         </div>
         <div class="project-arrow" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
@@ -991,11 +1053,11 @@
 
       <div class="about-stats" aria-label="Studio stats">
         <div>
-          <div class="stat-num">6+</div>
+          <div class="stat-num">18+</div>
           <div class="stat-label">Years Active</div>
         </div>
         <div>
-          <div class="stat-num">50+</div>
+          <div class="stat-num">400+</div>
           <div class="stat-label">Projects</div>
         </div>
         <div>
@@ -1013,6 +1075,11 @@
   <!-- ─── Client Logos ──────────────────────────────── -->
   <div class="clients" aria-label="Clients and partners">
     <p class="clients-label">Trusted by</p>
+    <div class="featured-client-logo">
+      <div class="featured-client-logo-frame">
+        <img src="assets/logos/lineaCreditos.png" alt="Linea Creditos" loading="lazy" />
+      </div>
+    </div>
     <div class="clients-logos">
       <img src="assets/logos/HC_Logo-Principal_Blanco.png"  alt="Hacienda client logo"       class="client-logo" loading="lazy" />
       <img src="assets/logos/Potrero Los Llanos White.png"   alt="Potrero Los Llanos"          class="client-logo" loading="lazy" style="height:112px;" />
@@ -1026,9 +1093,9 @@
   <section class="contact" id="contact" aria-label="Contact">
     <p class="contact-eyebrow">Let's Work Together</p>
     <h2 class="contact-headline">Got a project<br/>in mind?</h2>
-    <a href="mailto:hello@axr.co" class="contact-email">hello@axr.co</a>
+    <a href="mailto:axr@axrpr.com" class="contact-email">axr@axrpr.com</a>
     <div class="contact-actions">
-      <a href="mailto:hello@axr.co" class="btn-primary">
+      <a href="mailto:axr@axrpr.com" class="btn-primary">
         Start a Project
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
