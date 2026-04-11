@@ -854,7 +854,6 @@
     <div class="filter-inner">
       <button class="filter-btn active" data-filter="all"           onclick="filterProjects(this, 'all')">All</button>
       <button class="filter-btn"        data-filter="photography"   onclick="filterProjects(this, 'photography')">Photography</button>
-      <button class="filter-btn"        data-filter="documentary"   onclick="filterProjects(this, 'documentary')">Documentary</button>
       <button class="filter-btn"        data-filter="marketing"     onclick="filterProjects(this, 'marketing')">Marketing</button>
       <button class="filter-btn"        data-filter="hipodromos"    onclick="filterProjects(this, 'hipodromos')">Hipodromos</button>
     </div>
@@ -862,6 +861,18 @@
 
   <section id="work" aria-label="Work">
     <div class="section-label" aria-hidden="true">Selected Work</div>
+
+
+    <div id="hipodromos-featured" class="featured" style="display:none; padding:0 0 48px;" aria-label="Hipódromos featured">
+      <div class="featured-inner">
+        <img src="assets/Alberto/DSC03336.jpg" alt="Hipódromos documental" class="featured-img" loading="lazy" />
+        <div class="featured-content">
+          <span class="featured-tag">Documental</span>
+          <h2 class="featured-title">Hipódromos</h2>
+          <p class="featured-desc">Hipódromos es una serie documental creada y conducida por Alberto Rodríguez, dedicada a capturar la esencia de los recintos ecuestres más emblemáticos del mundo. Con un enfoque que combina la pasión por la velocidad y el respeto por la tradición, esta producción ofrece una mirada íntima a la arquitectura, la historia y la adrenalina que define a cada pista. Desde el Caribe hasta los escenarios internacionales más prestigiosos, Alberto nos guía a través de las historias de quienes dan vida al deporte de los reyes, convirtiendo cada episodio en un viaje inolvidable para el fanático de pura cepa.</p>
+        </div>
+      </div>
+    </div>
 
     <div class="grid-container" role="list">
 
@@ -919,7 +930,7 @@
       </article>
 
       <!-- Card 5 -->
-      <article class="project-card card-tall visible" data-category="documentary" role="listitem" tabindex="0" aria-label="Project: Salón de la Fama — Documentary">
+      <article class="project-card card-tall visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Salón de la Fama — Hipodromos">
         <div class="project-overlay">
           <div class="project-cat">Documentary</div>
           <h2 class="project-title">Salón de la Fama</h2>
@@ -982,6 +993,32 @@
         </div>
       </article>
 
+      <!-- Card 13 -->
+      <article class="project-card card-wide visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Marketing — Marketing">
+        <img src="assets/Alberto/DSC02870.jpg" alt="Marketing photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Marketing</div>
+          <h2 class="project-title">Marketing</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 14 -->
+      <article class="project-card card-wide visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Marketing — Marketing">
+        <img src="assets/Alberto/image2.jpeg" alt="Marketing photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Marketing</div>
+          <h2 class="project-title">Marketing</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
       <!-- Card 10 -->
       <article class="project-card card-wide visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Racetrack — Hipodromos">
         <img src="assets/Alberto/IMG_2497.jpg" alt="Racetrack grandstand" class="project-img" loading="lazy" />
@@ -996,7 +1033,7 @@
       </article>
 
       <!-- Card 11 -->
-      <article class="project-card card-cinema visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Lucky Cash Campaign — Hipodromos">
+      <article class="project-card card-cinema visible" data-category="marketing" role="listitem" tabindex="0" aria-label="Project: Lucky Cash Campaign — Marketing">
         <img src="assets/Alberto/IMG_8319.JPG" alt="Lucky Cash Hipódromo storefront campaign" class="project-img" loading="lazy" />
         <div class="project-overlay">
           <div class="project-cat">Hipodromos</div>
@@ -1021,25 +1058,36 @@
         </div>
       </article>
 
+      <!-- Card 15 -->
+      <article class="project-card card-wide visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Hipodromos — Hipodromos">
+        <img src="assets/Alberto/48DB77CD-7723-4061-8C9E-2B86AE8B1146.JPEG" alt="Hipodromos photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Hipodromos</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
+      <!-- Card 16 -->
+      <article class="project-card card-tall visible" data-category="hipodromos" role="listitem" tabindex="0" aria-label="Project: Hipodromos — Hipodromos">
+        <img src="assets/Alberto/2AEE6189-89B8-4BA5-B0A5-FDB2D2B1B6D3.JPEG" alt="Hipodromos photography" class="project-img" loading="lazy" />
+        <div class="project-overlay">
+          <div class="project-cat">Hipodromos</div>
+          <h2 class="project-title">Hipodromos</h2>
+          <div class="project-year">2025</div>
+        </div>
+        <div class="project-arrow" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <!-- ─── Featured Project ──────────────────────────── -->
-  <div class="featured" aria-label="Featured project">
-    <div class="featured-inner">
-      <img src="assets/Alberto/DSC03336.jpg" alt="Featured project: Hall of Fame documentary" class="featured-img" loading="lazy" />
-      <div class="featured-content">
-        <span class="featured-tag">Featured</span>
-        <h2 class="featured-title">Hall of Fame Documentary</h2>
-        <p class="featured-desc">A visual record of an evening celebrating legacy, culture, and community — captured as it happened.</p>
-        <a href="#contact" class="btn-primary">
-          View Case
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-      </div>
-    </div>
-  </div>
-
   <!-- ─── About ─────────────────────────────────────── -->
   <div class="about" id="about" aria-label="About AXR">
     <div class="about-text">
@@ -1124,11 +1172,13 @@
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
+      // Show / hide hipodromos featured panel
+      document.getElementById('hipodromos-featured').style.display = category === 'hipodromos' ? 'block' : 'none';
+
       // Show / hide cards
       document.querySelectorAll('.project-card').forEach(card => {
         const match = category === 'all' || card.dataset.category === category;
         card.classList.toggle('visible', match);
-        // For CSS: show/hide via display
         card.style.display = match ? '' : 'none';
       });
     }
