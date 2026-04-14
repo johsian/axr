@@ -124,14 +124,60 @@
     }
 
     /* ─── Hero ──────────────────────────────────────────── */
-    .hero {
+    /* ─── Hero Pin Container ────────────────────────── */
+    #hero-pin {
       position: relative;
+      height: 400vh;
+    }
+
+    .hero {
+      position: sticky;
+      top: 0;
       height: 100dvh;
       min-height: 600px;
       display: flex;
       align-items: flex-end;
       padding: 0 40px 72px;
       overflow: hidden;
+    }
+
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-preloader {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: opacity 0.6s ease;
+    }
+    .hero-preloader.hidden { opacity: 0; pointer-events: none; }
+
+    .hero-preloader-bar {
+      width: 64px;
+      height: 1px;
+      background: rgba(255,255,255,0.15);
+      overflow: hidden;
+    }
+    .hero-preloader-fill {
+      height: 100%;
+      background: rgba(255,255,255,0.7);
+      width: 0%;
+      transition: width 0.15s linear;
     }
 
     .hero-media {
@@ -819,15 +865,10 @@
   </div>
 
   <!-- ─── Hero ─────────────────────────────────────── -->
+  <div id="hero-pin">
   <section class="hero" aria-label="Hero">
     <div class="hero-media" aria-hidden="true">
-      <!--
-        Swap to video when ready:
-        <video autoplay muted loop playsinline poster="assets/Alberto/DSC01094.JPG">
-          <source src="assets/Videos/Danny.mp4" type="video/mp4" />
-        </video>
-      -->
-      <img src="assets/Alberto/DSC01193.JPG" alt="" />
+      <canvas id="hero-canvas"></canvas>
     </div>
 
     <div class="hero-content">
@@ -843,11 +884,17 @@
       </div>
     </div>
 
+    <div class="hero-preloader" id="hero-preloader" aria-hidden="true">
+      <div class="hero-preloader-bar"><div class="hero-preloader-fill" id="hero-preloader-fill"></div></div>
+      <span id="hero-preloader-label">Loading</span>
+    </div>
+
     <div class="hero-scroll" aria-hidden="true">
       <div class="hero-scroll-line"></div>
       <span>Scroll</span>
     </div>
   </section>
+  </div><!-- /#hero-pin -->
 
   <!-- ─── Filter + Project Grid ────────────────────── -->
   <div class="filter-bar" role="navigation" aria-label="Project filter">
@@ -1197,6 +1244,83 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeMenu();
     });
+
+    // ── Hero frame scrub ─────────────────────────────
+    (function () {
+      const FRAME_COUNT = 121;
+      const canvas      = document.getElementById('hero-canvas');
+      const ctx         = canvas.getContext('2d');
+      const pin         = document.getElementById('hero-pin');
+      const preloader   = document.getElementById('hero-preloader');
+      const fill        = document.getElementById('hero-preloader-fill');
+      const label       = document.getElementById('hero-preloader-label');
+
+      const dpr = window.devicePixelRatio || 1;
+      let currentFrame  = 0;
+      let loadedCount   = 0;
+      const images      = new Array(FRAME_COUNT);
+
+      function setCanvasSize() {
+        canvas.width  = window.innerWidth  * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width  = window.innerWidth  + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.scale(dpr, dpr);
+        if (images[currentFrame] && images[currentFrame].complete) {
+          drawFrame(images[currentFrame]);
+        }
+      }
+
+      function drawFrame(img) {
+        const cw = window.innerWidth, ch = window.innerHeight;
+        const iw = img.naturalWidth,  ih = img.naturalHeight;
+        const scale = Math.max(cw / iw, ch / ih);
+        const sw = iw * scale, sh = ih * scale;
+        const dx = (cw - sw) / 2, dy = (ch - sh) / 2;
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.drawImage(img, dx, dy, sw, sh);
+      }
+
+      function frameUrl(i) {
+        return 'axrhero-frames-web/frame_' + String(i).padStart(4, '0') + '.jpg';
+      }
+
+      // Preload all frames
+      for (let i = 0; i < FRAME_COUNT; i++) {
+        const img = new Image();
+        img.onload = function () {
+          loadedCount++;
+          const pct = Math.round((loadedCount / FRAME_COUNT) * 100);
+          fill.style.width = pct + '%';
+          label.textContent = pct < 100 ? 'Loading ' + pct + '%' : 'Scroll';
+          if (loadedCount === 1) { setCanvasSize(); drawFrame(img); }
+          if (loadedCount === FRAME_COUNT) {
+            setTimeout(() => preloader.classList.add('hidden'), 800);
+          }
+        };
+        img.src = frameUrl(i + 1);
+        images[i] = img;
+      }
+
+      setCanvasSize();
+      window.addEventListener('resize', setCanvasSize, { passive: true });
+
+      // Scroll → frame index
+      function onScroll() {
+        const pinTop    = pin.getBoundingClientRect().top + window.scrollY;
+        const scrolled  = window.scrollY - pinTop;
+        const maxScroll = pin.offsetHeight - window.innerHeight;
+        const progress  = Math.max(0, Math.min(1, scrolled / maxScroll));
+        const idx       = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
+
+        if (idx !== currentFrame && images[idx] && images[idx].complete) {
+          currentFrame = idx;
+          drawFrame(images[idx]);
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
 
     // ── Nav scroll background ────────────────────────
     const nav = document.querySelector('nav');
