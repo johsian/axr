@@ -6,3 +6,4 @@ assets/logos/.DS_Store
 node_modules/
 assets/Videos/
 axrhero-frames/
+.vercel

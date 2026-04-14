@@ -149,37 +149,6 @@
       display: block;
     }
 
-    .hero-preloader {
-      position: absolute;
-      bottom: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.5);
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: opacity 0.6s ease;
-    }
-    .hero-preloader.hidden { opacity: 0; pointer-events: none; }
-
-    .hero-preloader-bar {
-      width: 64px;
-      height: 1px;
-      background: rgba(255,255,255,0.15);
-      overflow: hidden;
-    }
-    .hero-preloader-fill {
-      height: 100%;
-      background: rgba(255,255,255,0.7);
-      width: 0%;
-      transition: width 0.15s linear;
-    }
-
     .hero-media {
       position: absolute;
       inset: 0;
@@ -866,35 +835,30 @@
 
   <!-- ─── Hero ─────────────────────────────────────── -->
   <div id="hero-pin">
-  <section class="hero" aria-label="Hero">
-    <div class="hero-media" aria-hidden="true">
-      <canvas id="hero-canvas"></canvas>
-    </div>
-
-    <div class="hero-content">
-      <p class="hero-eyebrow">Independent Creative Studio</p>
-      <img src="assets/logos/AXR 2026.png" alt="AXR" class="hero-title" style="height:clamp(80px,12vw,160px); width:auto; filter:brightness(0) invert(1);" />
-      <p class="hero-sub">Photography · Marketing · Documentary — stories told with purpose.</p>
-      <div class="hero-actions">
-        <a href="#work" class="btn-primary">
-          View Work
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <a href="#contact" class="btn-ghost">Start a Project</a>
+    <section class="hero" aria-label="Hero">
+      <div class="hero-media" aria-hidden="true">
+        <canvas id="hero-canvas"></canvas>
       </div>
-    </div>
 
-    <div class="hero-preloader" id="hero-preloader" aria-hidden="true">
-      <div class="hero-preloader-bar"><div class="hero-preloader-fill" id="hero-preloader-fill"></div></div>
-      <span id="hero-preloader-label">Loading</span>
-    </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">Independent Creative Studio</p>
+        <img src="assets/logos/AXR 2026.png" alt="AXR" class="hero-title" style="height:clamp(80px,12vw,160px); width:auto; filter:brightness(0) invert(1);" />
+        <p class="hero-sub">Photography · Marketing · Documentary — stories told with purpose.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn-primary">
+            View Work
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#contact" class="btn-ghost">Start a Project</a>
+        </div>
+      </div>
 
-    <div class="hero-scroll" aria-hidden="true">
-      <div class="hero-scroll-line"></div>
-      <span>Scroll</span>
-    </div>
-  </section>
-  </div><!-- /#hero-pin -->
+      <div class="hero-scroll" aria-hidden="true">
+        <div class="hero-scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+  </div>
 
   <!-- ─── Filter + Project Grid ────────────────────── -->
   <div class="filter-bar" role="navigation" aria-label="Project filter">
@@ -1248,35 +1212,34 @@
     // ── Hero frame scrub ─────────────────────────────
     (function () {
       const FRAME_COUNT = 121;
-      const canvas      = document.getElementById('hero-canvas');
-      const ctx         = canvas.getContext('2d');
-      const pin         = document.getElementById('hero-pin');
-      const preloader   = document.getElementById('hero-preloader');
-      const fill        = document.getElementById('hero-preloader-fill');
-      const label       = document.getElementById('hero-preloader-label');
+      const canvas = document.getElementById('hero-canvas');
+      const pin = document.getElementById('hero-pin');
+      if (!canvas || !pin) return;
 
-      const dpr = window.devicePixelRatio || 1;
-      let currentFrame  = 0;
-      let loadedCount   = 0;
-      const images      = new Array(FRAME_COUNT);
+      const ctx = canvas.getContext('2d');
+      const images = new Array(FRAME_COUNT);
+      let currentFrame = 0;
 
       function setCanvasSize() {
-        canvas.width  = window.innerWidth  * dpr;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
         canvas.height = window.innerHeight * dpr;
-        canvas.style.width  = window.innerWidth  + 'px';
+        canvas.style.width = window.innerWidth + 'px';
         canvas.style.height = window.innerHeight + 'px';
-        ctx.scale(dpr, dpr);
-        if (images[currentFrame] && images[currentFrame].complete) {
-          drawFrame(images[currentFrame]);
-        }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        if (images[currentFrame]?.complete) drawFrame(images[currentFrame]);
       }
 
       function drawFrame(img) {
-        const cw = window.innerWidth, ch = window.innerHeight;
-        const iw = img.naturalWidth,  ih = img.naturalHeight;
+        const cw = window.innerWidth;
+        const ch = window.innerHeight;
+        const iw = img.naturalWidth;
+        const ih = img.naturalHeight;
         const scale = Math.max(cw / iw, ch / ih);
-        const sw = iw * scale, sh = ih * scale;
-        const dx = (cw - sw) / 2, dy = (ch - sh) / 2;
+        const sw = iw * scale;
+        const sh = ih * scale;
+        const dx = (cw - sw) / 2;
+        const dy = (ch - sh) / 2;
         ctx.clearRect(0, 0, cw, ch);
         ctx.drawImage(img, dx, dy, sw, sh);
       }
@@ -1285,40 +1248,38 @@
         return 'axrhero-frames-web/frame_' + String(i).padStart(4, '0') + '.jpg';
       }
 
-      // Preload all frames
+      function renderForProgress(progress) {
+        const idx = Math.min(FRAME_COUNT - 1, Math.floor(progress * (FRAME_COUNT - 1)));
+        if (idx !== currentFrame && images[idx]?.complete) {
+          currentFrame = idx;
+          drawFrame(images[idx]);
+        }
+      }
+
       for (let i = 0; i < FRAME_COUNT; i++) {
         const img = new Image();
         img.onload = function () {
-          loadedCount++;
-          const pct = Math.round((loadedCount / FRAME_COUNT) * 100);
-          fill.style.width = pct + '%';
-          label.textContent = pct < 100 ? 'Loading ' + pct + '%' : 'Scroll';
-          if (loadedCount === 1) { setCanvasSize(); drawFrame(img); }
-          if (loadedCount === FRAME_COUNT) {
-            setTimeout(() => preloader.classList.add('hidden'), 800);
+          if (i === 0) {
+            currentFrame = 0;
+            setCanvasSize();
+            drawFrame(img);
           }
         };
         img.src = frameUrl(i + 1);
         images[i] = img;
       }
 
-      setCanvasSize();
-      window.addEventListener('resize', setCanvasSize, { passive: true });
-
-      // Scroll → frame index
       function onScroll() {
-        const pinTop    = pin.getBoundingClientRect().top + window.scrollY;
-        const scrolled  = window.scrollY - pinTop;
+        const scrollY = window.scrollY;
+        const pinTop = pin.getBoundingClientRect().top + scrollY;
         const maxScroll = pin.offsetHeight - window.innerHeight;
-        const progress  = Math.max(0, Math.min(1, scrolled / maxScroll));
-        const idx       = Math.min(FRAME_COUNT - 1, Math.floor(progress * FRAME_COUNT));
-
-        if (idx !== currentFrame && images[idx] && images[idx].complete) {
-          currentFrame = idx;
-          drawFrame(images[idx]);
-        }
+        const rawProgress = maxScroll > 0 ? (scrollY - pinTop) / maxScroll : 0;
+        const progress = Math.max(0, Math.min(1, rawProgress));
+        renderForProgress(progress);
       }
 
+      setCanvasSize();
+      window.addEventListener('resize', setCanvasSize, { passive: true });
       window.addEventListener('scroll', onScroll, { passive: true });
     })();
 
